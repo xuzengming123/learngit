@@ -3,7 +3,7 @@ from cfg import g_vcode
 from pprint import pprint
 from robot.libraries.BuiltIn import BuiltIn
 
-
+c = 'haaaaaaaaaaaaaaaaaaaa'
 class  SchoolTeacherLib:
     URL = "http://ci.ytesting.com/api/3school/teachers"
 
