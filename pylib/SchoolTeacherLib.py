@@ -5,7 +5,7 @@ from robot.libraries.BuiltIn import BuiltIn
 
 
 class  SchoolTeacherLib:
-    URL = "http://ci.ytesting.com/api/3school/school_classes"
+    URL = "http://ci.ytesting.com/api/3school/teachers"
 
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
 
@@ -18,17 +18,13 @@ class  SchoolTeacherLib:
 
     def list_teacher_list(self,subjectid=None):
         #列出老师
+        params = {
+            'vcode': self.vcode,
+            'action': 'search_with_pagenation'
+        }
         if subjectid != None:
-            params = {
-                'vcode':self.vcode,
-                'action':'search_with_pagenation',
-                'subjectid':int(subjectid)
-            }
-        else:
-            params = {
-                'vcode': self.vcode,
-                'action': 'search_with_pagenation'
-            }
+            params['subjectid'] = subjectid
+
         response = requests.get(self.URL, params=params)
 
         bodyDict = response.json()
@@ -36,7 +32,8 @@ class  SchoolTeacherLib:
         return bodyDict
 
 
-    def add_teacher_list(self,username,realname,subjectid,classlist,phonename,email,idcardnumber):
+
+    def add_teacher_list(self,username,realname,subjectid,classlist,phonenumber,email,idcardnumber,idSaveName=None):
         #添加老师
         params = {
             'vcode':self.vcode,
@@ -45,7 +42,7 @@ class  SchoolTeacherLib:
             'realname':realname,
             'subjectid':int(subjectid),
             'classlist':classlist,
-            'phonename':phonename,
+            'phonenumber':phonenumber,
             'email':email,
             'idcardnumber':idcardnumber
         }
@@ -53,7 +50,11 @@ class  SchoolTeacherLib:
 
         bodyDict = response.json()
         pprint(bodyDict, indent=2)
+
+        if idSaveName:
+            BuiltIn().set_global_variable('${%s}'%idSaveName, bodyDict['id'])
         return bodyDict
+
 
     def modify_school_teacher(self,teacherid,realname,subjectid,classlist,phonenumber,email,idcardnumber):
         #修改老师
