@@ -1,9 +1,9 @@
 #coding=utf-8
-
+from src.funtions.print_image_code import GetCode
 from src.until.read_ini import ReadIni
 from selenium import webdriver
 from src.funtions.find_element import FindElement
-from src.funtions.print_image_code import GetCode
+
 import time,random
 from PIL import Image
 

@@ -1,6 +1,10 @@
 import pytesseract
 from PIL import Image
+import requests
 
-image = Image.open(r"E:\imooc\xxxx.png")
-code = pytesseract.image_to_string(image, lang="chi_sim+eng", config="--psm 9")
-print(code)
+a = 'Hallo World'
+
+
+b = reversed(a)
+
+print(''.join(b))

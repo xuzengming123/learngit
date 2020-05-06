@@ -83,5 +83,4 @@ class GetCode():
         # 去掉识别结果中的特殊字符
         exclude_char_list = ' .:\\|\'\"?![],()~@#$%^&*_+-={};<>/¥'
         text = ''.join([x for x in text if x not in exclude_char_list])
-        print(text)
         return text

@@ -1,8 +1,14 @@
 #coding=utf-8
 from src.until.read_ini import ReadIni
+
+
+
+
+
 class FindElement():
     def __init__(self,driver):
         self.driver = driver
+
     def get_element(self,key):
         read_ini = ReadIni()
         data = read_ini.get_value(key)
@@ -38,3 +44,9 @@ class FindElement():
         except Exception as e:
             print(e)
         return None
+
+    def get_path(self,key):
+        read_ini = ReadIni()
+        data = read_ini.get_value(key)
+        print('data: ',data)
+        return data

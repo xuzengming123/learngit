@@ -6,11 +6,11 @@ class RegisterBusiness(object):
     def __init__(self, driver):
         self.register_h = RegisterHandle(driver)
 
-    def user_base(self, email, name, code,*like):
+    def user_base(self, email, name,*like):
         self.register_h.send_user_email(email)
         self.register_h.send_user_name(name)
-        self.register_h.send_user_code(code)
         self.register_h.send_user_like(*like)
+        self.register_h.send_user_code()
         self.register_h.click_register_button()
 
     def register_succes(self):
@@ -24,6 +24,16 @@ class RegisterBusiness(object):
         self.register_h.send_user_email(email)
         self.register_h.click_register_button()
         if self.register_h.get_user_text('email_error') is None:
+            print('输入非法数字：%s，没有出现提示'%email)
+            return True
+        else:
+            print('输入非法数字：%s,出现错误提示'%email)
+            return False
+
+    def register_funtions(self,email,assertCode,assertText):
+        self.register_h.send_user_email(email)
+        self.register_h.click_register_button()
+        if self.register_h.get_user_text(assertCode,assertText) is None:
             print('输入非法数字：%s，没有出现提示'%email)
             return True
         else:
@@ -56,5 +66,5 @@ class RegisterBusiness(object):
             print('验证码为空，没有出现错误提示')
             return True
         else:
-            print('验证码不为空，没有错误提示')
+            print('验证码不为空，有错误提示')
             return False
