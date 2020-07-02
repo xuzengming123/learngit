@@ -30,24 +30,24 @@ class RegisterBusiness(object):
             print('输入非法数字：%s,出现错误提示'%email)
             return False
 
-    def register_funtions(self,email,assertCode,assertText):
-        self.register_h.send_user_email(email)
+    def register_funtions(self,email,name,assertCode,assertText,*like):
+        self.user_base(email, name,*like)
         self.register_h.click_register_button()
         if self.register_h.get_user_text(assertCode,assertText) is None:
-            print('输入非法数字：%s，没有出现提示'%email)
+            print('输入数字：%s，没有出现提示'%email)
             return True
         else:
-            print('输入非法数字：%s,出现错误提示'%email)
+            print('输入数字：%s,出现错误提示'%email)
             return False
 
     def login_name_error(self, name):
         self.register_h.send_user_name(name)
         self.register_h.click_register_button()
         if self.register_h.get_user_text('user_error') is None:
-            print('输入非法数字：%s，没有出现提示' % name)
+            print('输入数字：%s，没有出现提示' % name)
             return True
         else:
-            print('输入非法数字：%s,出现错误提示' % name)
+            print('输入数字：%s,出现错误提示' % name)
             return False
 
     def login_like_error(self):

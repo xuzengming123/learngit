@@ -48,5 +48,4 @@ class FindElement():
     def get_path(self,key):
         read_ini = ReadIni()
         data = read_ini.get_value(key)
-        print('data: ',data)
         return data

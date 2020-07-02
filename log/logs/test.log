@@ -1,0 +1,6 @@
+test223333
+test223333
+2020-07-01 20:05:14,062 user_log.py <module> 10 DEBUG test1234
+2020-07-01 20:09:24,762 user_log.py ---><module> 10: DEBUG ---->test1234
+2020-07-01 20:14:57,530 user_log.py ---><module> 10: DEBUG ---->test1234
+2020-07-01 20:15:40,176 user_log.py ---><module> 10: DEBUG ---->test1234

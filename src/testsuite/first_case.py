@@ -1,19 +1,23 @@
 # coding=utf-8
-import os,sys
+import os
 import time
-
 from selenium import webdriver
 from business.register_business import RegisterBusiness
+from log.user_log import UserLog
 import unittest
 import HTMLTestRunner.HTMLTestRunner
 
 
-
 class FisrstCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.log = UserLog()
+        cls.logger = cls.log.get_log()
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get('https://login.sina.com.cn/signup/signup?entry=homepage')
-        self.driver.find_element_by_css_selector('.main_tab >a:nth-child(2)').click()
+        # self.driver.find_element_by_css_selector('.main_tab >a:nth-child(2)').click()
+        self.logger.info('this is chrome')
         self.login = RegisterBusiness(self.driver)
         print('===============\n这是case的前置条件')
 
@@ -26,6 +30,9 @@ class FisrstCase(unittest.TestCase):
         time.sleep(1)
         self.driver.quit()
         print('这是case的后置条件\n===============\n')
+    @classmethod
+    def tearDownClass(cls):
+        cls.log.close_handle()
 
     def test_login_email_error(self):
         email_error = self.login.login_email_error('11')
@@ -88,6 +95,10 @@ if __name__ == '__main__':
     f = open(file_path,'wb')
     suite = unittest.TestSuite()
     suite.addTest(FisrstCase('test_login_succes'))
-    # unittest.TextTestRunner().run(suite)
+    suite.addTest(FisrstCase('test_login_email_error'))
+    suite.addTest(FisrstCase('test_login_username_error'))
+    suite.addTest(FisrstCase('test_login_like_error'))
+    suite.addTest(FisrstCase('test_login_code_error'))
+    unittest.TextTestRunner().run(suite)
     runner = HTMLTestRunner.HTMLTestRunner.HTMLTestRunner(stream=f,title='This is first report',description="这个是我们第一次测试报告",verbosity=2)
     runner.run(suite)

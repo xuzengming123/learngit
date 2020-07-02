@@ -6,7 +6,7 @@ from page.register_page import RegisterPage
 from src.until.read_ini import ReadIni
 
 
-class Getcode():
+class Getcode:
     def __init__(self,driver):
         self.driver = driver
 
@@ -34,5 +34,4 @@ class Getcode():
         img_path = register_p.fd.get_path(img_path_key)
         a = GetCode()
         text = a.OCR_lmj(img_path)
-        print(text)
         return text

@@ -25,7 +25,6 @@ class RegisterHandle():
 
     def send_user_code(self):
         # 输入验证码
-        print('1234')
         #定位验证码图片元素，截图保存到盘
         gg = Getcode(self.driver)
         gg.get_img('img_path_key','img_element_key')
@@ -37,10 +36,14 @@ class RegisterHandle():
         #点击
         self.register_p.get_button_element().click()
 
-    def get_user_text(self,info,user_info):
+    def get_user_text(self,info,user_info=None):
         try:
             if info == 'email_error':
                 text = self.register_p.get_email_error_element().get_attribute('textContent')
+                if text == user_info:
+                    print('文案正确')
+                else:
+                    print('文案不正确')
             elif info == 'user_error':
                 text = self.register_p.get_name_error_element().get_attribute('textContent')
             elif info == 'like_error':
